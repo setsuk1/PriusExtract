@@ -1,0 +1,60 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Prius Extract (prompt args)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx tsx ${workspaceFolder}/src/cli/prius_extract_v2.ts ${input:extractArgs}",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prius Repack (prompt args)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx tsx ${workspaceFolder}/src/cli/prius_repack.ts ${input:repackArgs}",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prius Patch (prompt args)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx tsx ${workspaceFolder}/src/cli/prius_patch.ts ${input:patchArgs}",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prius Build TypeScript",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run build",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prius Build Executables",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run build:exe",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "extractArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_extract_v2.ts",
+      "default": "--idx Prius.idx --dat Prius.dat extract-all --out output"
+    },
+    {
+      "id": "repackArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_repack.ts",
+      "default": "--in-dir output --out-idx New.idx --out-dat New.dat --jobs 8"
+    },
+    {
+      "id": "patchArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_patch.ts",
+      "default": "--idx Prius.idx --dat Prius.dat --patch-dir mods --jobs 8"
+    }
+  ]
+}

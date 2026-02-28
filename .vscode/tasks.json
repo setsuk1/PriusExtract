@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Prius: npm install",
+      "type": "shell",
+      "command": "npm install",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prius: build TypeScript",
+      "type": "shell",
+      "command": "npm run build",
+      "group": "build",
+      "problemMatcher": "$tsc"
+    },
+    {
+      "label": "Prius: extract (prompt args)",
+      "type": "shell",
+      "command": "npx tsx src/cli/prius_extract_v2.ts ${input:extractArgs}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prius: repack (prompt args)",
+      "type": "shell",
+      "command": "npx tsx src/cli/prius_repack.ts ${input:repackArgs}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prius: patch (prompt args)",
+      "type": "shell",
+      "command": "npx tsx src/cli/prius_patch.ts ${input:patchArgs}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prius: build executables",
+      "type": "shell",
+      "command": "npm run build:exe",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "extractArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_extract_v2.ts",
+      "default": "--idx Prius.idx --dat Prius.dat extract-all --out output"
+    },
+    {
+      "id": "repackArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_repack.ts",
+      "default": "--in-dir output --out-idx New.idx --out-dat New.dat --jobs 8"
+    },
+    {
+      "id": "patchArgs",
+      "type": "promptString",
+      "description": "Arguments for src/cli/prius_patch.ts",
+      "default": "--idx Prius.idx --dat Prius.dat --patch-dir mods --jobs 8"
+    }
+  ]
+}
